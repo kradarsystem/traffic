@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>교통량 검지 장비 성능 비교</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+
+        /* Base style for the highlighted column */
+        .highlight-col {
+            background-color: #f7f8ff;
+            position: relative; /* Needed for the pseudo-element */
+            overflow: hidden; /* Hide the pseudo-element when it's outside */
+        }
+        
+        /* --- New Shine Animation --- */
+        @keyframes shine {
+            from {
+                transform: translateX(-100%) skewX(-20deg);
+            }
+            to {
+                transform: translateX(100%) skewX(-20deg);
+            }
+        }
+
+        /* Pseudo-element for the shine effect */
+        .highlight-col::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.5) 50%, rgba(255, 255, 255, 0) 100%);
+            transform: translateX(-100%) skewX(-20deg);
+            pointer-events: none; /* Make sure it doesn't block mouse events */
+        }
+        
+        /* Class to trigger the animation */
+        .is-hovered::after {
+            animation: shine 1.6s infinite ease-out;
+        }
+
+
+        /* Performance level indicators */
+        .level-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-weight: 700;
+        }
+        .level-indicator::before {
+            content: '';
+            width: 10px;
+            height: 10px;
+            border-radius: 3px;
+            flex-shrink: 0;
+        }
+        .level-excellent::before { background-color: #22c55e; } /* green-500 */
+        .level-good::before { background-color: #a3e635; } /* lime-400 */
+        .level-improved::before { background-color: #facc15; } /* yellow-400 */
+        .level-normal::before { background-color: #f97316; } /* orange-500 */
+        .level-weak::before { background-color: #ef4444; } /* red-500 */
+        
+        .level-excellent { color: #166534; } /* green-800 */
+        .level-good { color: #4d7c0f; } /* lime-800 */
+        .level-improved { color: #854d0e; } /* yellow-800 */
+        .level-normal { color: #9a3412; } /* orange-800 */
+        .level-weak { color: #991b1b; } /* red-800 */
+
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 antialiased">
+
+    <!-- Main Container -->
+    <div id="infographic-container" class="container mx-auto px-4 py-12 md:py-20 bg-gray-50">
+
+        <!-- Header -->
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-slate-800 via-indigo-600 to-blue-600 drop-shadow-sm">📡 교통량 검지 장비 전격 비교 🚗</h1>
+            <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">각 시스템의 장단점과 핵심 성능을 한눈에 파악하여 최적의 솔루션을 선택하세요.</p>
+        </header>
+
+        <!-- Comparison Table -->
+        <div class="w-full overflow-x-auto">
+            <table class="w-full min-w-[800px] bg-white rounded-2xl shadow-xl border border-gray-200 text-sm md:text-base">
+                <thead class="text-left">
+                    <tr>
+                        <th class="p-4 md:p-5 font-bold text-lg text-gray-700 bg-gray-100 rounded-tl-2xl w-1/4 whitespace-nowrap">구분</th>
+                        <th class="p-4 md:p-5 font-bold text-lg text-blue-800 bg-blue-50/70 border-l border-gray-200 w-1/4 whitespace-nowrap">3D 레이더</th>
+                        <th class="p-4 md:p-5 font-bold text-lg text-indigo-800 border-l border-gray-200 w-1/4 highlight-col radar-4d-col whitespace-nowrap">
+                            <div class="flex items-center gap-2">
+                                <span>4D 융복합 레이더</span>
+                                <span class="flex items-center gap-1 text-xs bg-indigo-500 text-white font-semibold py-1 px-2 rounded-full">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>
+                                    추천
+                                </span>
+                            </div>
+                        </th>
+                        <th class="p-4 md:p-5 font-bold text-lg text-purple-800 bg-purple-50/70 border-l border-gray-200 rounded-tr-2xl w-1/4 whitespace-nowrap">영상식 시스템</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-200">
+                    <tr class="divide-x divide-gray-200">
+                        <td class="p-4 md:p-5 font-semibold text-gray-600 bg-gray-50">핵심 기술/원리</td>
+                        <td class="p-4 md:p-5">전파 송수신 (거리, 방위각, 고도각)</td>
+                        <td class="p-4 md:p-5 highlight-col radar-4d-col">전파 송수신 (거리, 방위각, 고도각, <strong class="text-indigo-700">상대 속도</strong>)</td>
+                        <td class="p-4 md:p-5">광학 이미징 + 영상 처리</td>
+                    </tr>
+                    <tr class="divide-x divide-gray-200">
+                        <td class="p-4 md:p-5 font-semibold text-gray-600 bg-gray-50">주요 측정 정보</td>
+                        <td class="p-4 md:p-5">객체의 3차원 위치</td>
+                        <td class="p-4 md:p-5 highlight-col radar-4d-col">객체의 3차원 위치 + <strong class="text-indigo-700">상대 속도</strong></td>
+                        <td class="p-4 md:p-5">픽셀 정보 (위치, 크기, 형태, 색상 등)</td>
+                    </tr>
+                    <tr class="divide-x divide-gray-200">
+                        <td class="p-4 md:p-5 font-semibold text-gray-600 bg-gray-50">차량 검지 정확도</td>
+                        <td class="p-4 md:p-5"><span class="level-indicator level-good">양호</span> (혼잡시 저하)</td>
+                        <td class="p-4 md:p-5 highlight-col radar-4d-col"><span class="level-indicator level-excellent">우수</span> (혼잡시에도 분리 유리)</td>
+                        <td class="p-4 md:p-5"><span class="level-indicator level-good">양호</span> (악천후/가림 시 저하)</td>
+                    </tr>
+                    <tr class="divide-x divide-gray-200">
+                        <td class="p-4 md:p-5 font-semibold text-gray-600 bg-gray-50">속도 측정 정확도</td>
+                        <td class="p-4 md:p-5"><span class="level-indicator level-normal">보통</span> (위치 추적 기반)</td>
+                        <td class="p-4 md:p-5 highlight-col radar-4d-col"><span class="level-indicator level-excellent">높음</span> (도플러 효과 직접 측정)</td>
+                        <td class="p-4 md:p-5"><span class="level-indicator level-weak">보통~낮음</span> (캘리브레이션 의존)</td>
+                    </tr>
+                    <tr class="divide-x divide-gray-200">
+                        <td class="p-4 md:p-5 font-semibold text-gray-600 bg-gray-50">차종 구분 능력</td>
+                        <td class="p-4 md:p-5"><span class="level-indicator level-normal">기본적</span> (RCS 크기 기반)</td>
+                        <td class="p-4 md:p-5 highlight-col radar-4d-col"><span class="level-indicator level-improved">향상됨</span> (포인트 클라우드 활용)</td>
+                        <td class="p-4 md:p-5"><span class="level-indicator level-excellent">우수</span> (시각 정보 활용)</td>
+                    </tr>
+                    <tr class="divide-x divide-gray-200">
+                        <td class="p-4 md:p-5 font-semibold text-gray-600 bg-gray-50">악천후 성능</td>
+                        <td class="p-4 md:p-5"><span class="level-indicator level-good">양호</span></td>
+                        <td class="p-4 md:p-5 highlight-col radar-4d-col"><span class="level-indicator level-excellent">우수</span></td>
+                        <td class="p-4 md:p-5"><span class="level-indicator level-weak">취약</span> (시야 방해)</td>
+                    </tr>
+                    <tr class="divide-x divide-gray-200">
+                        <td class="p-4 md:p-5 font-semibold text-gray-600 bg-gray-50">광원 의존성</td>
+                        <td class="p-4 md:p-5"><span class="level-indicator level-excellent">낮음</span> (자체 전파)</td>
+                        <td class="p-4 md:p-5 highlight-col radar-4d-col"><span class="level-indicator level-excellent">낮음</span> (자체 전파)</td>
+                        <td class="p-4 md:p-5"><span class="level-indicator level-weak">높음</span> (조명, 그림자 영향)</td>
+                    </tr>
+                    <tr class="divide-x divide-gray-200">
+                        <td class="p-4 md:p-5 font-semibold text-gray-600 bg-gray-50">가림 현상 처리</td>
+                        <td class="p-4 md:p-5"><span class="level-indicator level-normal">보통</span></td>
+                        <td class="p-4 md:p-5 highlight-col radar-4d-col"><span class="level-indicator level-good">양호</span> (속도 정보로 보강)</td>
+                        <td class="p-4 md:p-5"><span class="level-indicator level-weak">취약</span> (가려지면 검지 불가)</td>
+                    </tr>
+                    <tr class="divide-x divide-gray-200">
+                        <td class="p-4 md:p-5 font-semibold text-gray-600 bg-gray-50">부가 기능</td>
+                        <td class="p-4 md:p-5">제한적</td>
+                        <td class="p-4 md:p-5 highlight-col radar-4d-col">제한적</td>
+                        <td class="p-4 md:p-5">번호판 인식, 영상 증거 확보 등</td>
+                    </tr>
+                    <tr class="divide-x divide-gray-200">
+                        <td class="p-4 md:p-5 font-semibold text-gray-600 bg-gray-50 rounded-bl-2xl">비용 (초기/유지)</td>
+                        <td class="p-4 md:p-5"><strong class="text-green-700">상대적 저렴</strong></td>
+                        <td class="p-4 md:p-5 highlight-col radar-4d-col"><strong class="text-red-700">상대적 고가</strong></td>
+                        <td class="p-4 md:p-5 rounded-br-2xl">다양함 (고성능 S/W, 서버 비용)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const radar4dCells = document.querySelectorAll('.radar-4d-col');
+            
+            radar4dCells.forEach(cell => {
+                // Add mouseenter event to trigger animation for the entire column
+                cell.addEventListener('mouseenter', () => {
+                    radar4dCells.forEach(c => c.classList.add('is-hovered'));
+                });
+
+                // Add mouseleave event to stop animation for the entire column
+                cell.addEventListener('mouseleave', () => {
+                    radar4dCells.forEach(c => c.classList.remove('is-hovered'));
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
